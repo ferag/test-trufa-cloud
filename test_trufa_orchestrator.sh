@@ -15,7 +15,7 @@ mkdir ${STAT_FOLDER}fastqc_report
 
 echo `date +%F\ %H:%M:%S` "START FastQC" >> ${OUT_FOLDER}.LOG.txt
 
-reads_in=($READS_FILES)
+reads_in=$READS_FILES
 
 for ((i=0; i<${#reads_in[@]}; i++)); do
 
