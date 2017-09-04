@@ -24,6 +24,7 @@ for ((i=0; i<${#reads_in[@]}; i++)); do
     echo FASTQC: IN: ${reads_in[ i ]} >> ${OUT_FOLDER}.LOG.txt
 done
 wait
-cat ${OUT_FOLDER}/*.html
+ls ${OUT_FOLDER}
+cat ${OUT_FOLDER}*.html
 echo `date +%F\ %H:%M:%S` "END FastQC" >> ${OUT_FOLDER}.LOG.txt
 
