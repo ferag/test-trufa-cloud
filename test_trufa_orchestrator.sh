@@ -1,15 +1,28 @@
 #!/bin/bash
-mkdir /data
-cd /data
-wget https://193.146.75.60/web/static/demo_files/reads_left.fq.tar.gz --no-check-certificate
-wget https://193.146.75.60/web/static/demo_files/reads_right.fq.tar.gz --no-check-certificate
+apt-get update -y
+apt-get install software-properties-common -y
+apt-add-repository ppa:ansible/ansible
+apt-get update && apt-get install -y ansible && rm -rf /var/lib/apt/lists/* 
+ansible-galaxy install indigo-dc.oneclient && ansible-playbook /etc/ansible/roles/indigo-dc.oneclient/tests/test.yml
 
-tar -zxvf ./reads_left.fq.tar.gz
-tar -zxvf ./reads_right.fq.tar.gz
+env
+mkdir -p /onedata/input
+mkdir -p /onedata/output
 
-export READS_FILES='/data/reads_left.fq /data/reads_right.fq'
-export OUT_FOLDER='/data/'
-export STAT_FOLDER='/data/'
+ONECLIENT_AUTHORIZATION_TOKEN="$INPUT_ONEDATA_TOKEN" PROVIDER_HOSTNAME="$INPUT_ONEDATA_PROVIDERS" oneclient --no_check_certificate --authentication token -o ro /onedata/input || exit 1
+ONECLIENT_AUTHORIZATION_TOKEN="$OUTPUT_ONEDATA_TOKEN" PROVIDER_HOSTNAME="$OUTPUT_ONEDATA_PROVIDERS" oneclient --no_check_certificate --authentication token -o rw /onedata/output || exit 1
+
+cd /onedata/input
+
+INPUTDIR="/onedata/input/$INPUT_ONEDATA_SPACE/$INPUT_PATH"
+OUTPUTDIR=
+
+mkdir -p "$OUTPUTDIR"
+
+OUT_FOLDER="/onedata/output/$OUTPUT_ONEDATA_SPACE/$OUTPUT_PATH"
+IN_FOLDER="/onedata/input/$INPUT_ONEDATA_SPACE/$INPUT_PATH"
+STAT_FOLDER="/onedata/output/$OUTPUT_ONEDATA_SPACE/$OUTPUT_PATH"
+READS_FILES="$IN_FOLDER/data/reads_left.fq $IN_FOLDER/data/reads_right.fq"
 
 
 mkdir ${STAT_FOLDER}fastqc_report
