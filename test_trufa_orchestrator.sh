@@ -38,6 +38,5 @@ for ((i=0; i<${#reads_in[@]}; i++)); do
 done
 wait
 ls ${OUT_FOLDER}
-cat ${OUT_FOLDER}*.html
 echo `date +%F\ %H:%M:%S` "END FastQC" >> ${OUT_FOLDER}.LOG.txt
 
