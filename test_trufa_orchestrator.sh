@@ -22,7 +22,9 @@ mkdir -p "$OUTPUTDIR"
 OUT_FOLDER="/onedata/output/$OUTPUT_ONEDATA_SPACE/$OUTPUT_PATH"
 IN_FOLDER="/onedata/input/$INPUT_ONEDATA_SPACE/$INPUT_PATH"
 STAT_FOLDER="/onedata/output/$OUTPUT_ONEDATA_SPACE/$OUTPUT_PATH"
-READS_FILES="$IN_FOLDER/data/reads_left.fq $IN_FOLDER/data/reads_right.fq"
+READS_FILES="$IN_FOLDER/reads_left.fq $IN_FOLDER/reads_right.fq"
+
+mkdir -p "$OUT_FOLDER"
 
 
 mkdir ${STAT_FOLDER}fastqc_report
