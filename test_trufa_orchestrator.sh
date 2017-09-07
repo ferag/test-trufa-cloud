@@ -24,6 +24,10 @@ IN_FOLDER="/onedata/input/$INPUT_ONEDATA_SPACE/$INPUT_PATH"
 STAT_FOLDER="/onedata/output/$OUTPUT_ONEDATA_SPACE/$OUTPUT_PATH"
 READS_FILES="$IN_FOLDER/reads_left.fq $IN_FOLDER/reads_right.fq"
 
+echo 'Hello'
+echo $OUT_FOLDER
+echo $READS_FILES
+
 mkdir -p "$OUT_FOLDER"
 
 
