@@ -1,10 +1,4 @@
 #!/bin/bash
-apt-get update -y
-apt-get install software-properties-common -y
-apt-add-repository ppa:ansible/ansible
-apt-get update && apt-get install -y ansible && rm -rf /var/lib/apt/lists/* 
-ansible-galaxy install indigo-dc.oneclient && ansible-playbook /etc/ansible/roles/indigo-dc.oneclient/tests/test.yml
-
 env
 mkdir -p /onedata/input
 mkdir -p /onedata/output
